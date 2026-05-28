@@ -16,12 +16,13 @@ export function Navbar() {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-2 z-40 w-full">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-12 max-w-full items-center justify-between rounded-[1.5rem] border border-white/20 bg-white/10 px-4 shadow-lg shadow-slate-900/10 backdrop-blur-xl transition-colors duration-300 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-xl bg-gradient-primary shadow-glow" />
-            <span className="text-lg font-semibold tracking-tight">Lovable DEX</span>
+            <span className="text-lg font-semibold tracking-tight">DEX</span>
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {NAV.map((item) => {
@@ -60,6 +61,7 @@ export function Navbar() {
           />
         </div>
       </div>
+    </div>
       {settingsOpen && (
         <div className="absolute right-4 top-16 z-50 sm:right-6 lg:right-8">
           <SettingsPopover onClose={() => setSettingsOpen(false)} />

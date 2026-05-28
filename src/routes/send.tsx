@@ -10,7 +10,7 @@ import { fmtUsd } from "@/lib/format";
 export const Route = createFileRoute("/send")({
   head: () => ({
     meta: [
-      { title: "Send — Lovable DEX" },
+      { title: "Send — DEX" },
       { name: "description", content: "Send tokens with ENS resolution and gas estimates." },
     ],
   }),

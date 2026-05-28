@@ -178,33 +178,47 @@ export function SwapCard() {
 
   return (
     <div className="relative">
-      <div className="glass mx-auto w-full max-w-[480px] rounded-3xl p-4 shadow-card">
-        {/* Tabs + settings */}
-        <div className="mb-3 flex items-center justify-between px-1">
+      <div className="glass mx-auto w-full max-w-130 rounded-4xl border border-white/20 bg-white/70 p-4 shadow-[0_28px_90px_rgba(15,23,42,0.16)] backdrop-blur-2xl sm:p-5">
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <div>
+            <h1 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-[2rem]">
+              Swap tokens
+            </h1>
+            <p className="mt-1 text-sm leading-6 text-muted-foreground">
+              Clean pricing, fast routing, and a simple trade flow.
+            </p>
+          </div>
+          <button
+            onClick={() => setSettingsOpen((s) => !s)}
+            className="rounded-full border border-white/30 bg-white/40 p-2 text-muted-foreground shadow-sm transition-all duration-200 hover:bg-white/60 hover:text-foreground hover:shadow-md"
+            aria-label="Settings"
+          >
+            <SettingsIcon className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Tabs */}
+        <div className="mb-4 rounded-full border border-white/25 bg-white/35 p-1 shadow-sm backdrop-blur-xl">
           <div className="flex items-center gap-1">
             {TABS.map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
-                  tab === t ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+                  tab === t
+                    ? "bg-white text-foreground shadow-sm"
+                    : "text-muted-foreground hover:bg-white/40 hover:text-foreground"
                 }`}
               >
                 {t}
               </button>
             ))}
           </div>
-          <button
-            onClick={() => setSettingsOpen((s) => !s)}
-            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
-          >
-            <SettingsIcon className="h-4 w-4" />
-          </button>
         </div>
 
         {/* Input */}
         <TokenInput
-          label="Sell"
+          label="You pay"
           token={inputToken}
           value={amountIn}
           onChange={setAmountIn}
@@ -228,7 +242,7 @@ export function SwapCard() {
 
         {/* Output */}
         <TokenInput
-          label="Buy"
+          label="You receive"
           token={outputToken}
           value={outFormatted ? Number(outFormatted).toFixed(6).replace(/\.?0+$/, "") : ""}
           onChange={() => {}}
@@ -247,7 +261,7 @@ export function SwapCard() {
               exit={{ opacity: 0, height: 0 }}
               className="mt-3 overflow-hidden"
             >
-              <div className="space-y-2 rounded-2xl bg-surface/50 px-4 py-3 text-xs">
+              <div className="space-y-2 rounded-3xl border border-white/30 bg-white/45 px-4 py-3 text-xs shadow-sm backdrop-blur-xl">
                 <Row
                   label="Rate"
                   value={`1 ${inputToken.symbol} = ${fmtNumber(rate, { max: 6 })} ${outputToken.symbol}`}
@@ -263,7 +277,7 @@ export function SwapCard() {
                 />
                 <Row
                   label="Route"
-                  value={`${inputToken.symbol} → ${outputToken.symbol} (V3 ${(quote.fee / 10000).toFixed(2)}%)`}
+                  value={`${inputToken.symbol} → ${outputToken.symbol} • V3 ${(quote.fee / 10000).toFixed(2)}%`}
                 />
               </div>
             </motion.div>
@@ -294,7 +308,7 @@ export function SwapCard() {
       </div>
 
       {settingsOpen && (
-        <div className="absolute right-0 top-14 z-20">
+        <div className="absolute right-0 top-16 z-20">
           <SettingsPopover onClose={() => setSettingsOpen(false)} />
         </div>
       )}
@@ -352,10 +366,10 @@ function TokenInput({
   return (
     <div className="rounded-2xl bg-surface/70 p-4 transition-colors focus-within:bg-surface">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">{label}</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{label}</span>
         {balance !== undefined && (
           <span className="text-xs text-muted-foreground">
-            Balance: {fmtNumber(balance, { max: 4 })}
+            Available: {fmtNumber(balance, { max: 4 })}
             {showMax && (
               <button
                 onClick={onMax}
@@ -375,7 +389,7 @@ function TokenInput({
             value={value}
             onChange={(e) => onChange(e.target.value.replace(/[^0-9.]/g, ""))}
             readOnly={readOnly}
-            className="w-full bg-transparent text-3xl font-medium outline-none placeholder:text-muted-foreground/40"
+            className="w-full bg-transparent text-3xl font-semibold tracking-tight outline-none placeholder:text-muted-foreground/40 sm:text-[2.5rem]"
           />
           {loading && (
             <Loader2 className="absolute right-1 top-2 h-4 w-4 animate-spin text-muted-foreground" />
@@ -383,14 +397,14 @@ function TokenInput({
         </div>
         <button
           onClick={onPickToken}
-          className="flex shrink-0 items-center gap-2 rounded-full bg-surface-elevated px-3 py-1.5 font-semibold hover:bg-surface-elevated/80"
+          className="flex shrink-0 items-center gap-2 rounded-full border border-white/30 bg-white/55 px-3 py-2 font-semibold shadow-sm transition-all duration-200 hover:bg-white/75 hover:shadow-md"
         >
           <TokenAvatar symbol={token.symbol} size={24} />
           <span className="text-sm">{token.symbol}</span>
           <ChevronDown className="h-4 w-4 text-muted-foreground" />
         </button>
       </div>
-      <div className="mt-1 text-xs text-muted-foreground">
+      <div className="mt-2 text-xs text-muted-foreground">
         {usd ? fmtUsd(usd) : "$0"}
       </div>
     </div>
@@ -437,7 +451,7 @@ function ActionButton({
     return (
       <ConnectButton.Custom>
         {({ openConnectModal }) => (
-          <PillButton onClick={openConnectModal}>Connect wallet</PillButton>
+          <PillButton onClick={openConnectModal}>Connect wallet to swap</PillButton>
         )}
       </ConnectButton.Custom>
     );
@@ -451,7 +465,7 @@ function ActionButton({
   if (state === "empty")
     return (
       <PillButton disabled tone="muted">
-        Enter an amount
+        Enter an amount to preview
       </PillButton>
     );
   if (state === "insufficient")
@@ -487,7 +501,7 @@ function ActionButton({
       </PillButton>
     );
   if (state === "success") return <PillButton tone="success">Swap successful</PillButton>;
-  return <PillButton onClick={onSwap}>Swap</PillButton>;
+  return <PillButton onClick={onSwap}>Review & swap</PillButton>;
 }
 
 function PillButton({
@@ -503,7 +517,7 @@ function PillButton({
 }) {
   const styles =
     tone === "muted"
-      ? "bg-surface text-muted-foreground"
+      ? "bg-white/55 text-muted-foreground"
       : tone === "success"
       ? "bg-success text-success-foreground"
       : "bg-gradient-primary text-primary-foreground hover:opacity-95 shadow-glow";
