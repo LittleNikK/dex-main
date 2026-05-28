@@ -6,7 +6,7 @@ import { fmtUsd, shortAddress } from "@/lib/format";
 export const Route = createFileRoute("/tx/$hash")({
   head: ({ params }) => ({
     meta: [
-      { title: `Transaction ${params.hash.slice(0, 10)}… — Lovable DEX` },
+      { title: `Transaction ${params.hash.slice(0, 10)}… —  DEX` },
       { name: "description", content: "On-chain transaction details, status and gas." },
     ],
   }),
