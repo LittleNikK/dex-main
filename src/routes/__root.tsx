@@ -66,15 +66,35 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "DEX — Swap, Pool & Earn on-chain" },
-      { name: "description", content: "Production-grade decentralized exchange across Ethereum, Base, Arbitrum, Optimism & Polygon." },
+      {
+        name: "description",
+        content:
+          "Production-grade decentralized exchange across Ethereum, Base, Arbitrum, Optimism & Polygon.",
+      },
       { property: "og:title", content: "DEX — Swap, Pool & Earn on-chain" },
-      { property: "og:description", content: "Production-grade decentralized exchange across Ethereum, Base, Arbitrum, Optimism & Polygon." },
+      {
+        property: "og:description",
+        content:
+          "Production-grade decentralized exchange across Ethereum, Base, Arbitrum, Optimism & Polygon.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "DEX — Swap, Pool & Earn on-chain" },
-      { name: "twitter:description", content: "Production-grade decentralized exchange across Ethereum, Base, Arbitrum, Optimism & Polygon." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c3cc3561-df61-4e19-a4ee-81ea3c63e934/id-preview-1dd968e5--4e223a22-8c26-49c4-8611-b2e1e65a02d0.lovable.app-1779869350580.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c3cc3561-df61-4e19-a4ee-81ea3c63e934/id-preview-1dd968e5--4e223a22-8c26-49c4-8611-b2e1e65a02d0.lovable.app-1779869350580.png" },
+      {
+        name: "twitter:description",
+        content:
+          "Production-grade decentralized exchange across Ethereum, Base, Arbitrum, Optimism & Polygon.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c3cc3561-df61-4e19-a4ee-81ea3c63e934/id-preview-1dd968e5--4e223a22-8c26-49c4-8611-b2e1e65a02d0.lovable.app-1779869350580.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c3cc3561-df61-4e19-a4ee-81ea3c63e934/id-preview-1dd968e5--4e223a22-8c26-49c4-8611-b2e1e65a02d0.lovable.app-1779869350580.png",
+      },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
@@ -104,8 +124,8 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Web3Providers>
         <div className="min-h-screen">
-          <Navbar/>
-          <main className="mx-auto w-full max-w-7xl px-4 pb-16 pt-6 sm:px-6 lg:px-8">
+          <Navbar />
+          <main className="mx-auto w-full max-w-7xl px-4 pb-0 pt-0 sm:px-6 lg:px-8">
             <Outlet />
           </main>
           <Footer />

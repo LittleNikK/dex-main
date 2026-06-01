@@ -45,9 +45,7 @@ export function PriceChart({
 
   useEffect(() => {
     if (!seriesRef.current) return;
-    seriesRef.current.setData(
-      data.map((d) => ({ time: d.time as never, value: d.value }))
-    );
+    seriesRef.current.setData(data.map((d) => ({ time: d.time as never, value: d.value })));
     chartRef.current?.timeScale().fitContent();
   }, [data]);
 

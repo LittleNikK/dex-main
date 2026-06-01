@@ -10,7 +10,7 @@ import { fmtUsd } from "@/lib/format";
 export const Route = createFileRoute("/pool")({
   head: () => ({
     meta: [
-      { title: "Pool — Lovable DEX" },
+      { title: "Pool —  DEX" },
       { name: "description", content: "Provide liquidity, manage positions, and earn fees from V3 pools." },
     ],
   }),

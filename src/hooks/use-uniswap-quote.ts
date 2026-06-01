@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { usePublicClient } from "wagmi";
-import { parseUnits, formatUnits, type Address } from "viem";
+import { useConnectorClient } from "wagmi";
+import { createPublicClient, custom, parseUnits, formatUnits, type Address } from "viem";
 import {
   FEE_TIERS,
   QUOTER_V2,
@@ -9,6 +9,7 @@ import {
   type FeeTier,
 } from "@/config/uniswap";
 import type { Token } from "@/config/tokens";
+import { SUPPORTED_CHAINS } from "@/config/wagmi";
 
 export interface QuoteResult {
   amountOut: bigint;
@@ -27,7 +28,15 @@ export function useUniswapQuote(
   amount: string,
   chainId: number,
 ) {
-  const publicClient = usePublicClient({ chainId });
+  const connectorClient = useConnectorClient({ chainId });
+  const chain = SUPPORTED_CHAINS.find((supportedChain) => supportedChain.id === chainId);
+  const publicClient =
+    connectorClient.data && chain
+      ? (createPublicClient({
+          chain,
+          transport: custom(connectorClient.data.transport as never),
+        }) as ReturnType<typeof createPublicClient>)
+      : null;
 
   const enabled =
     !!publicClient &&
@@ -37,14 +46,7 @@ export function useUniswapQuote(
     input.address.toLowerCase() !== output.address.toLowerCase();
 
   return useQuery<QuoteResult | null>({
-    queryKey: [
-      "uniswap-quote",
-      chainId,
-      input.address,
-      output.address,
-      amount,
-      input.decimals,
-    ],
+    queryKey: ["uniswap-quote", chainId, input.address, output.address, amount, input.decimals],
     enabled,
     refetchInterval: 12_000,
     queryFn: async () => {

@@ -8,7 +8,7 @@ import { fmtNumber, fmtUsd, shortAddress } from "@/lib/format";
 export const Route = createFileRoute("/pools/$address")({
   head: () => ({
     meta: [
-      { title: "Pool — Lovable DEX" },
+      { title: "Pool — DEX" },
       { name: "description", content: "Pool TVL, volume, fees and live transactions." },
     ],
   }),

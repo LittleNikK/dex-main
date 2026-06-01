@@ -9,17 +9,40 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WalletRouteImport } from './routes/wallet'
+import { Route as SwapRouteImport } from './routes/swap'
 import { Route as SendRouteImport } from './routes/send'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PoolRouteImport } from './routes/pool'
+import { Route as MstchainRouteImport } from './routes/mstchain'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as DexswapxRouteImport } from './routes/dexswapx'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as ApiRouteImport } from './routes/api'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TxHashRouteImport } from './routes/tx.$hash'
 import { Route as TokensAddressRouteImport } from './routes/tokens.$address'
 import { Route as PoolsAddressRouteImport } from './routes/pools.$address'
 
+const WalletRoute = WalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SwapRoute = SwapRouteImport.update({
+  id: '/swap',
+  path: '/swap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SendRoute = SendRouteImport.update({
   id: '/send',
   path: '/send',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PoolRoute = PoolRouteImport.update({
@@ -27,9 +50,34 @@ const PoolRoute = PoolRouteImport.update({
   path: '/pool',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MstchainRoute = MstchainRouteImport.update({
+  id: '/mstchain',
+  path: '/mstchain',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DexswapxRoute = DexswapxRouteImport.update({
+  id: '/dexswapx',
+  path: '/dexswapx',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiRoute = ApiRouteImport.update({
+  id: '/api',
+  path: '/api',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -55,18 +103,34 @@ const PoolsAddressRoute = PoolsAddressRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/api': typeof ApiRoute
+  '/blog': typeof BlogRoute
+  '/dexswapx': typeof DexswapxRoute
   '/explore': typeof ExploreRoute
+  '/mstchain': typeof MstchainRoute
   '/pool': typeof PoolRoute
+  '/portfolio': typeof PortfolioRoute
   '/send': typeof SendRoute
+  '/swap': typeof SwapRoute
+  '/wallet': typeof WalletRoute
   '/pools/$address': typeof PoolsAddressRoute
   '/tokens/$address': typeof TokensAddressRoute
   '/tx/$hash': typeof TxHashRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/api': typeof ApiRoute
+  '/blog': typeof BlogRoute
+  '/dexswapx': typeof DexswapxRoute
   '/explore': typeof ExploreRoute
+  '/mstchain': typeof MstchainRoute
   '/pool': typeof PoolRoute
+  '/portfolio': typeof PortfolioRoute
   '/send': typeof SendRoute
+  '/swap': typeof SwapRoute
+  '/wallet': typeof WalletRoute
   '/pools/$address': typeof PoolsAddressRoute
   '/tokens/$address': typeof TokensAddressRoute
   '/tx/$hash': typeof TxHashRoute
@@ -74,9 +138,17 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/api': typeof ApiRoute
+  '/blog': typeof BlogRoute
+  '/dexswapx': typeof DexswapxRoute
   '/explore': typeof ExploreRoute
+  '/mstchain': typeof MstchainRoute
   '/pool': typeof PoolRoute
+  '/portfolio': typeof PortfolioRoute
   '/send': typeof SendRoute
+  '/swap': typeof SwapRoute
+  '/wallet': typeof WalletRoute
   '/pools/$address': typeof PoolsAddressRoute
   '/tokens/$address': typeof TokensAddressRoute
   '/tx/$hash': typeof TxHashRoute
@@ -85,27 +157,51 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/api'
+    | '/blog'
+    | '/dexswapx'
     | '/explore'
+    | '/mstchain'
     | '/pool'
+    | '/portfolio'
     | '/send'
+    | '/swap'
+    | '/wallet'
     | '/pools/$address'
     | '/tokens/$address'
     | '/tx/$hash'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/api'
+    | '/blog'
+    | '/dexswapx'
     | '/explore'
+    | '/mstchain'
     | '/pool'
+    | '/portfolio'
     | '/send'
+    | '/swap'
+    | '/wallet'
     | '/pools/$address'
     | '/tokens/$address'
     | '/tx/$hash'
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/api'
+    | '/blog'
+    | '/dexswapx'
     | '/explore'
+    | '/mstchain'
     | '/pool'
+    | '/portfolio'
     | '/send'
+    | '/swap'
+    | '/wallet'
     | '/pools/$address'
     | '/tokens/$address'
     | '/tx/$hash'
@@ -113,9 +209,17 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ApiRoute: typeof ApiRoute
+  BlogRoute: typeof BlogRoute
+  DexswapxRoute: typeof DexswapxRoute
   ExploreRoute: typeof ExploreRoute
+  MstchainRoute: typeof MstchainRoute
   PoolRoute: typeof PoolRoute
+  PortfolioRoute: typeof PortfolioRoute
   SendRoute: typeof SendRoute
+  SwapRoute: typeof SwapRoute
+  WalletRoute: typeof WalletRoute
   PoolsAddressRoute: typeof PoolsAddressRoute
   TokensAddressRoute: typeof TokensAddressRoute
   TxHashRoute: typeof TxHashRoute
@@ -123,11 +227,32 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wallet': {
+      id: '/wallet'
+      path: '/wallet'
+      fullPath: '/wallet'
+      preLoaderRoute: typeof WalletRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/swap': {
+      id: '/swap'
+      path: '/swap'
+      fullPath: '/swap'
+      preLoaderRoute: typeof SwapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/send': {
       id: '/send'
       path: '/send'
       fullPath: '/send'
       preLoaderRoute: typeof SendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pool': {
@@ -137,11 +262,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mstchain': {
+      id: '/mstchain'
+      path: '/mstchain'
+      fullPath: '/mstchain'
+      preLoaderRoute: typeof MstchainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/explore': {
       id: '/explore'
       path: '/explore'
       fullPath: '/explore'
       preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dexswapx': {
+      id: '/dexswapx'
+      path: '/dexswapx'
+      fullPath: '/dexswapx'
+      preLoaderRoute: typeof DexswapxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api': {
+      id: '/api'
+      path: '/api'
+      fullPath: '/api'
+      preLoaderRoute: typeof ApiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -177,9 +337,17 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ApiRoute: ApiRoute,
+  BlogRoute: BlogRoute,
+  DexswapxRoute: DexswapxRoute,
   ExploreRoute: ExploreRoute,
+  MstchainRoute: MstchainRoute,
   PoolRoute: PoolRoute,
+  PortfolioRoute: PortfolioRoute,
   SendRoute: SendRoute,
+  SwapRoute: SwapRoute,
+  WalletRoute: WalletRoute,
   PoolsAddressRoute: PoolsAddressRoute,
   TokensAddressRoute: TokensAddressRoute,
   TxHashRoute: TxHashRoute,

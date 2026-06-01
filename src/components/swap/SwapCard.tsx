@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { useAccount, useBalance, useChainId } from "wagmi";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount, useChainId } from "wagmi";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { ArrowDown, ChevronDown, ExternalLink, Loader2, Settings as SettingsIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { parseUnits, formatUnits } from "viem";
@@ -13,6 +13,7 @@ import { fmtNumber, fmtUsd, shortAddress } from "@/lib/format";
 import type { Token } from "@/config/tokens";
 import { isNative, SWAP_ROUTER_02 } from "@/config/uniswap";
 import { useUniswapQuote } from "@/hooks/use-uniswap-quote";
+import { useWalletTokenBalance } from "@/hooks/use-wallet-token-balance";
 import {
   useApproveToken,
   useExecuteSwap,
@@ -38,6 +39,7 @@ const TABS = ["Swap", "Limit", "Buy"] as const;
 
 export function SwapCard() {
   const { isConnected, address } = useAccount();
+  const { openConnectModal } = useConnectModal();
   const chainId = useChainId();
   const { inputToken, outputToken, slippage, deadline, setInputToken, setOutputToken, flip } = useSwapStore();
 
@@ -48,13 +50,8 @@ export function SwapCard() {
 
   const supportedChain = !!SWAP_ROUTER_02[chainId];
 
-  const { data: inputBalance } = useBalance({
-    address,
-    token: isNative(inputToken.address) ? undefined : (inputToken.address as `0x${string}`),
-    chainId,
-  });
-
-  const balanceNum = inputBalance ? parseFloat(inputBalance.formatted) : 0;
+  const walletBalance = useWalletTokenBalance(inputToken, chainId);
+  const balanceNum = Number.isFinite(Number(walletBalance.balance)) ? Number(walletBalance.balance) : 0;
   const numAmount = parseFloat(amountIn) || 0;
 
   // Real Uniswap V3 quote
@@ -303,6 +300,7 @@ export function SwapCard() {
             inputSymbol={inputToken.symbol}
             onApprove={handleApprove}
             onSwap={handleSwap}
+            onConnect={openConnectModal ?? undefined}
           />
         </div>
       </div>
@@ -441,19 +439,17 @@ function ActionButton({
   inputSymbol,
   onApprove,
   onSwap,
+  onConnect,
 }: {
   state: SwapState;
   inputSymbol: string;
   onApprove: () => void;
   onSwap: () => void;
+  onConnect?: () => void;
 }) {
   if (state === "disconnected") {
     return (
-      <ConnectButton.Custom>
-        {({ openConnectModal }) => (
-          <PillButton onClick={openConnectModal}>Connect wallet to swap</PillButton>
-        )}
-      </ConnectButton.Custom>
+      <PillButton onClick={onConnect}>Connect wallet to swap</PillButton>
     );
   }
   if (state === "unsupported")

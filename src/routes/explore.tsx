@@ -8,7 +8,7 @@ import { TokenAvatar } from "@/components/swap/TokenSelectorModal";
 export const Route = createFileRoute("/explore")({
   head: () => ({
     meta: [
-      { title: "Explore — Lovable DEX" },
+      { title: "Explore — DEX" },
       { name: "description", content: "Live token, pool and transaction analytics across all supported chains." },
     ],
   }),

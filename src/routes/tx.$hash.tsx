@@ -18,7 +18,10 @@ function TxDetail() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <Link to="/explore" className="mb-4 inline-block text-sm text-muted-foreground hover:text-foreground">
+      <Link
+        to="/explore"
+        className="mb-4 inline-block text-sm text-muted-foreground hover:text-foreground"
+      >
         ← Back
       </Link>
 

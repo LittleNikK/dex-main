@@ -21,9 +21,9 @@ export function TokenSelectorModal({ open, onClose, onSelect, exclude }: Props) 
           (q === "" ||
             t.symbol.toLowerCase().includes(q.toLowerCase()) ||
             t.name.toLowerCase().includes(q.toLowerCase()) ||
-            t.address.toLowerCase().includes(q.toLowerCase()))
+            t.address.toLowerCase().includes(q.toLowerCase())),
       ),
-    [q, exclude]
+    [q, exclude],
   );
 
   if (!open) return null;

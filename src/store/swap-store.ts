@@ -30,6 +30,6 @@ export const useSwapStore = create<SwapState>()(
         set({ inputToken: outputToken, outputToken: inputToken });
       },
     }),
-    { name: "dex-swap-prefs" }
-  )
+    { name: "dex-swap-prefs" },
+  ),
 );

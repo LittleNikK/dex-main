@@ -29,7 +29,10 @@ function TokenDetail() {
 
   return (
     <div>
-      <Link to="/explore" className="mb-4 inline-block text-sm text-muted-foreground hover:text-foreground">
+      <Link
+        to="/explore"
+        className="mb-4 inline-block text-sm text-muted-foreground hover:text-foreground"
+      >
         ← Back to explore
       </Link>
 
@@ -38,14 +41,20 @@ function TokenDetail() {
           <div className="mb-4 flex items-center gap-3">
             <TokenAvatar symbol={token.symbol} size={40} />
             <div>
-              <h1 className="text-2xl font-semibold">{token.name} <span className="text-muted-foreground">({token.symbol})</span></h1>
-              <p className="font-mono text-xs text-muted-foreground">{shortAddress(token.address, 6)}</p>
+              <h1 className="text-2xl font-semibold">
+                {token.name} <span className="text-muted-foreground">({token.symbol})</span>
+              </h1>
+              <p className="font-mono text-xs text-muted-foreground">
+                {shortAddress(token.address, 6)}
+              </p>
             </div>
           </div>
 
           <div className="mb-2 flex items-baseline gap-3">
             <span className="text-4xl font-semibold">{fmtUsd(token.priceUsd ?? 0)}</span>
-            <span className={`text-sm font-medium ${change >= 0 ? "text-success" : "text-destructive"}`}>
+            <span
+              className={`text-sm font-medium ${change >= 0 ? "text-success" : "text-destructive"}`}
+            >
               {fmtPct(change)} (24h)
             </span>
           </div>
@@ -55,7 +64,10 @@ function TokenDetail() {
           </div>
 
           <div className="mt-6 grid grid-cols-3 gap-3">
-            <Stat label="Market cap" value={fmtUsd((token.priceUsd ?? 0) * 120_000_000, { compact: true })} />
+            <Stat
+              label="Market cap"
+              value={fmtUsd((token.priceUsd ?? 0) * 120_000_000, { compact: true })}
+            />
             <Stat label="24h Volume" value={fmtUsd(842_000_000, { compact: true })} />
             <Stat label="TVL" value={fmtUsd(1_240_000_000, { compact: true })} />
           </div>
@@ -77,7 +89,9 @@ function TokenDetail() {
                     <td className="px-4 py-3 capitalize">{t.type}</td>
                     <td className="px-4 py-3">{fmtUsd(t.usd)}</td>
                     <td className="px-4 py-3">{fmtNumber(t.amount0, { max: 4 })}</td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{shortAddress(t.account, 5)}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
+                      {shortAddress(t.account, 5)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
